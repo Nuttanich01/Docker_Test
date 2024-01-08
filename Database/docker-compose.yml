@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  prod_db_server:
+    image: timescale/timescaledb:latest-pg15
+    restart: always
+    ports:
+      - 54324:5432
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: prod_db_server
+    volumes:
+        - ./backup_prod_db_server2:/var/lib/postgresql/data2
+        
+  report_db_server:
+    image: timescale/timescaledb:latest-pg15
+    restart: always
+    ports:
+      - 54326:5432
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: report_db_server
+    volumes:
+        - ./backup_report_db_server:/var/lib/postgresql/data
